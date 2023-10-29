@@ -104,11 +104,6 @@ class PyCheckiOLessons():
         Output: An integer (int).
         """
 
-        # integer_text = 0
-        # 
-        # for string in text:
-        #     if string.isdigit():
-        #         integer_text += int(string)
 
         return sum(int(string) for string in text.split(' ') if string.isdigit())
 
