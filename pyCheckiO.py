@@ -1,3 +1,6 @@
+from typing import List, Any
+
+
 class PyCheckiOLessons():
 
     def __init__(self, ):
@@ -90,7 +93,6 @@ class PyCheckiOLessons():
 
         Output: A string (str).
         """
-
         return max(data, key=data.count)
 
     # Sum Numbers
@@ -103,12 +105,51 @@ class PyCheckiOLessons():
 
         Output: An integer (int).
         """
-
-
         return sum(int(string) for string in text.split(' ') if string.isdigit())
+
+    # End Zeros
+    def end_zeros(self, number: int) -> int:
+        """
+        Try to find out how many zeros a given number has at the end.
+
+        Input: A non-negative integer (int).
+
+        Output: An integer (int).
+        """
+        # asd =[]
+        # for i in reversed(str(a)):
+        #     if i == '0':
+        #         asd.append(i)
+        #     else:
+        #         break
+        # return asd.count('0')
+        return len(str(number)) - len(str(number).strip('0'))
+
+    # All the Same
+    def all_the_same(self, elements: List[Any]) -> bool:
+        """
+        In this mission you should check if all elements in the given sequence are equal.
+
+        Input: List.
+
+        Output: Logic value (bool).
+        """
+        # return False not in [elements[0] == element for element in elements]
+        return len(set(elements)) <= 1
+
+    # Easy Unpack
+    def easy_unpack(self, elements: tuple) -> tuple:
+        """
+        One important thing worth pointing out is that you need to use index in order to extract elements from the tuple. Pay attention, index counting starts from 0, not from 1. Which means that if you need to get the first element from the tuple elements, you should do elements[0], and the second element is elements[1].
+
+        Input: A tuple, at least 3 elements long.
+
+        Output: A tuple.
+        """
+        return (elements[0], elements[2], elements[-2])
 
 
 if __name__ == '__main__':
     pyCheckiO_lessons = PyCheckiOLessons()
-    result = pyCheckiO_lessons.sum_numbers("23 my 23 numbers 1st is ")
+    result = pyCheckiO_lessons.easy_unpack((1, 2, 3, 4, 5, 6, 7, 9))
     print(result)
