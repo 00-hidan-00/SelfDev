@@ -1,10 +1,8 @@
+from collections.abc import Iterable
 from typing import List, Any
 
 
 class PyCheckiOLessons():
-
-    def __init__(self, ):
-        ...
 
     # Multiply (Intro)
     def mult_two(self, a: int, b: int) -> int:
@@ -140,7 +138,10 @@ class PyCheckiOLessons():
     # Easy Unpack
     def easy_unpack(self, elements: tuple) -> tuple:
         """
-        One important thing worth pointing out is that you need to use index in order to extract elements from the tuple. Pay attention, index counting starts from 0, not from 1. Which means that if you need to get the first element from the tuple elements, you should do elements[0], and the second element is elements[1].
+        One important thing worth pointing out is that you need to use index in order
+        to extract elements from the tuple. Pay attention, index counting starts from 0, not from 1.
+        Which means that if you need to get the first element from the tuple elements, you should do elements[0],
+        and the second element is elements[1].
 
         Input: A tuple, at least 3 elements long.
 
@@ -148,8 +149,87 @@ class PyCheckiOLessons():
         """
         return (elements[0], elements[2], elements[-2])
 
+    # Count Digits
+    def count_digits(self, text: str) -> int:
+        """
+        You need to count the number of digits in a given string.
+
+        Input: String.
+
+        Output: Integer.
+        """
+        # [symbol.isdigit() for symbol in text].count(True) # Mine
+        # sum(map(str.isdigit, text)) - Speedy
+        return sum(symbol.isdigit() for symbol in text)  # Clear
+
+    # All Upper I
+    def is_all_upper(self, text: str) -> bool:
+        """
+        Check if a given string has all symbols in upper case.
+        If the string is empty or doesn't have any letter in it - function should return True.
+
+        Input: A string (str).
+
+        Output: A logic value (bool).
+        """
+        # return False not in [symbol.isupper() or symbol.isdigit() or symbol == '' for symbol in text.split(' ')] # Mine
+
+        return text.upper() == text  # Clear & Speedy
+
+    # Remove All Before
+
+    def remove_all_before(self, items: list, border: int) -> Iterable:
+        """
+        For the illustration we have a sequence [1, 2, 3, 4, 5]
+        and we need to remove all elements that go before 3 - which are 1 and 2.
+        We have two edge cases here: (1) if a cutting element cannot be found, then the sequence shoudn't be changed.
+        (2) if the sequence is empty, then it should remain empty.
+
+        Input: List and the border element.
+
+        Output: List or another Iterable (tuple, iterator, generator).
+        """
+        # return next((items[id:] for id, item in enumerate(items) if item == border), items) # Mine
+        # return next((items[items.index(item):] for item in items if item == border), items) # Mine is advanced
+
+        return items[items.index(border):] if border in items else items
+
+    # Replace First
+    def replace_first(self, items: list) -> Iterable:
+        """
+        In a given sequence the first element should become the last one.
+        An empty sequence or with only one element should stay the same.
+
+        Input: List.
+
+        Output: List or another Iterable (tuple, iterator, generator).
+        """
+        # if items:                              # Mine
+        #     items.append(items[0])
+        #     items.remove(items[0])
+        # return items
+
+        # return [items[i] for i in range(1, len(items))] + [items[0]] if items else items # - chatGPT
+
+        if len(items):  # Mine is advanced
+            items.append(items.pop(0))
+        return items
+
+    # Max Digit
+    def max_digit(self, value: int) -> int:
+        """
+        You have a number and you need to determine which digit in this number is the biggest.
+
+        Input: A positive integer (int).
+
+        Output: An integer 0-9 (int).
+        """
+        # return int(max(list(str(value))))
+
+        return max(map(int, str(value)))  # Speedy
+
 
 if __name__ == '__main__':
     pyCheckiO_lessons = PyCheckiOLessons()
-    result = pyCheckiO_lessons.easy_unpack((1, 2, 3, 4, 5, 6, 7, 9))
+    result = pyCheckiO_lessons.max_digit(388)  # 6
     print(result)
