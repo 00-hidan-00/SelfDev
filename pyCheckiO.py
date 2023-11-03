@@ -18,6 +18,7 @@ class PyCheckiOLessons():
 
         Output: Int.
         """
+
         return a * b
 
     # First Word (simplified)
@@ -31,6 +32,7 @@ class PyCheckiOLessons():
 
         Output: A string (str).
         """
+
         return text.split(" ")[0]
 
     # Is Even
@@ -56,6 +58,7 @@ class PyCheckiOLessons():
 
         Output: A logic value (bool).
         """
+
         return len(password) > 6
 
     # Number Length
@@ -67,6 +70,7 @@ class PyCheckiOLessons():
 
         Output: An integer (int).
         """
+
         return len(str(value))
 
     # Backward String
@@ -91,6 +95,7 @@ class PyCheckiOLessons():
 
         Output: A string (str).
         """
+
         return max(data, key=data.count)
 
     # Sum Numbers
@@ -103,6 +108,7 @@ class PyCheckiOLessons():
 
         Output: An integer (int).
         """
+
         return sum(int(string) for string in text.split(' ') if string.isdigit())
 
     # End Zeros
@@ -114,6 +120,7 @@ class PyCheckiOLessons():
 
         Output: An integer (int).
         """
+
         # asd =[]
         # for i in reversed(str(a)):
         #     if i == '0':
@@ -121,6 +128,7 @@ class PyCheckiOLessons():
         #     else:
         #         break
         # return asd.count('0')
+
         return len(str(number)) - len(str(number).strip('0'))
 
     # All the Same
@@ -132,7 +140,9 @@ class PyCheckiOLessons():
 
         Output: Logic value (bool).
         """
+
         # return False not in [elements[0] == element for element in elements]
+
         return len(set(elements)) <= 1
 
     # Easy Unpack
@@ -147,6 +157,7 @@ class PyCheckiOLessons():
 
         Output: A tuple.
         """
+
         return (elements[0], elements[2], elements[-2])
 
     # Count Digits
@@ -158,8 +169,11 @@ class PyCheckiOLessons():
 
         Output: Integer.
         """
+
         # [symbol.isdigit() for symbol in text].count(True) # Mine
+
         # sum(map(str.isdigit, text)) - Speedy
+
         return sum(symbol.isdigit() for symbol in text)  # Clear
 
     # All Upper I
@@ -172,6 +186,7 @@ class PyCheckiOLessons():
 
         Output: A logic value (bool).
         """
+
         # return False not in [symbol.isupper() or symbol.isdigit() or symbol == '' for symbol in text.split(' ')] # Mine
 
         return text.upper() == text  # Clear & Speedy
@@ -189,7 +204,9 @@ class PyCheckiOLessons():
 
         Output: List or another Iterable (tuple, iterator, generator).
         """
+
         # return next((items[id:] for id, item in enumerate(items) if item == border), items) # Mine
+
         # return next((items[items.index(item):] for item in items if item == border), items) # Mine is advanced
 
         return items[items.index(border):] if border in items else items
@@ -204,6 +221,7 @@ class PyCheckiOLessons():
 
         Output: List or another Iterable (tuple, iterator, generator).
         """
+
         # if items:                              # Mine
         #     items.append(items[0])
         #     items.remove(items[0])
@@ -224,12 +242,133 @@ class PyCheckiOLessons():
 
         Output: An integer 0-9 (int).
         """
+
         # return int(max(list(str(value))))
 
         return max(map(int, str(value)))  # Speedy
 
+    # Beginning Zeros
+    def beginning_zeros(self, a: str) -> int:
+        """
+        You have a string that consist only of digits.
+        You need to find how many zero digits ("0") are at the beginning of the given string.
+
+        Input: A string (str), that consists of digits.
+
+        Output: An integer (int).
+        """
+
+        # zoro_list = []     # Mine
+        # for digit in a:
+        #     if digit == '0':
+        #         zoro_list.append(digit)
+        #     else:
+        #         break
+        #
+        # return len([digit for digit in a if digit == '0'])
+
+        # str_int = str(int(a))  # Creative
+        # return len(a) - len(str_int) + (str_int == '0')
+
+        return len(a) - len(a.lstrip('0'))
+
+    # Between Markers (simplified)
+    def between_markers(self, text: str, start: str, end: str) -> str:
+        """
+        You are given a string and two markers (the initial one and final).
+        You have to find a substring enclosed between these two markers. But there are a few important conditions.
+
+        - The initial and final markers are always different.
+        - The initial and final markers are always 1 char size.
+        - The initial and final markers always exist in a string and go one after another.
+
+        Input: Three arguments. All of them are strings (str).
+        The second and third arguments are the initial and final markers.
+
+        Output: A string (str).
+        """
+
+        return text.split(start)[-1].split(end)[0]
+
+    # Split Pairs
+    def split_pairs(self, text: str) -> Iterable[str]:
+        """
+        Split the string into pairs of two characters.
+        If the string contains an odd number of characters,
+        then the missing second character of the final pair should be replaced with an underscore ('_').
+
+        Input: A string.
+
+        Output: A list or another Iterable of strings.
+        """
+
+        # if len(text) % 2 == 1:       # Mine (humanity)
+        #     new_text = text + '_'
+        # else:
+        #     new_text = text
+        # return [new_text[::2][index] + new_text[1::2][index] for index in range(len(new_text[::2]))]
+
+        return [text[::2][index] + (text if len(text) % 2 == 0 else text + '_')[1::2][index]
+                for index in range(len(text[::2]))]
+
+    # Correct Sentence
+    def correct_sentence(self, text: str) -> str:
+        """
+        For the input of your function, you will be given one sentence.
+        You have to return a corrected version, that starts with a capital letter and ends with a period (dot).
+
+        Pay attention to the fact that not all of the fixes are necessary.
+        If a sentence already ends with a period (dot), then adding another one will be a mistake.
+
+        Input: A string (str).
+
+        Output: A string (str).
+        """
+
+        # new_text = text     # Mine
+        # if not text[0].isupper():
+        #     new_text = new_text[0].upper() + new_text[1:]
+        # if text[-1]!='.':
+        #     new_text += '.'
+
+        # return text[0].upper() + text[1:] + ('.' if not text.endswith('.') else '')   # chatGPT
+
+        # Mine is advanced
+        return (text[0].upper() + text[1:] if not text[0].isupper() else text) + ('.' if text[-1] != '.' else '')
+
+    # Nearest Value
+    def nearest_value(self, values: set[int], one: int) -> int:
+        """
+        Find the nearest value to the given one.
+
+        You are given a set of integers and a value for which you need to find the nearest one.
+
+        For example, we have the following sequence of numbers: 4, 7, 10, 11, 12, 17,
+        and we need to find the nearest value to the number 9. If we sort this sequence in the ascending order,
+        then to the left of number 9 will be number 7 and to the right - will be number 10. But 10 is closer than 7,
+        which means that the correct answer is 10.
+
+        A few clarifications:
+
+        If 2 numbers are at the same distance, you need to choose the smallest one;
+        The sequence of numbers is always non-empty;
+        The given value can be in this sequence, which means that it’s the answer;
+        The sequence may contain both positive and negative numbers, but they are always integers;
+        The sequence isn’t sorted and consists only unique numbers.
+
+        Input: Two arguments. A set of integers. The sought value as an integer.
+
+        Output: An integer.
+
+        """
+        if one in values:
+            return one
+
+        for value in values:
+            ...
+
 
 if __name__ == '__main__':
     pyCheckiO_lessons = PyCheckiOLessons()
-    result = pyCheckiO_lessons.max_digit(388)  # 6
+    result = pyCheckiO_lessons.nearest_value({17, 4, 7, 10, 11, 12}, 9)  # ...
     print(result)
